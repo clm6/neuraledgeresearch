@@ -150,11 +150,11 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-12 leading-tight">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-24 leading-tight">
                 Modern Data Analytics for
-                <span className="text-gradient block mt-2">Tomorrow's Challenges</span>
+                <span className="text-gradient block mt-6">Tomorrow's Challenges</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 mb-20 max-w-3xl mx-auto">
                 Professional data analytics services delivering insights that drive business growth, 
                 power system optimization, and cutting-edge AI/ML solutions.
               </p>
