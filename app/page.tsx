@@ -142,7 +142,7 @@ export default function Home() {
       </nav>
 
       {/* Hero Section */}
-      <section className="pt-24 pb-16 gradient-bg">
+      <section className="pt-24 pb-24 gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <motion.div
@@ -150,15 +150,15 @@ export default function Home() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
                 Modern Data Analytics for
                 <span className="text-gradient block">Tomorrow's Challenges</span>
               </h1>
-              <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+              <p className="text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
                 Professional data analytics services delivering insights that drive business growth, 
                 power system optimization, and cutting-edge AI/ML solutions.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <a href="#contact" className="btn-primary inline-flex items-center">
                   Start Your Project
                   <ArrowRight className="ml-2 w-5 h-5" />
