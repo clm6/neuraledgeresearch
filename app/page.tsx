@@ -152,7 +152,7 @@ export default function Home() {
             >
               <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-32 leading-loose">
                 Modern Data Analytics for
-                <span className="text-gradient block mt-8 mb-8">Tomorrow's Challenges</span>
+                <span className="text-gradient block mt-8 mb-8">Today's Problems</span>
               </h1>
               <p className="text-xl text-gray-600 mb-24 max-w-3xl mx-auto">
                 Professional data analytics services delivering insights that drive business growth, 
