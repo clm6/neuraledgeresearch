@@ -8,13 +8,21 @@ export async function POST(request: NextRequest) {
     // Validate required fields
     if (!name || !email || !message) {
       return NextResponse.json(
-        { error: 'Missing required fields' },
+        { error: 'Please fill in all required fields (name, email, and message)' },
         { status: 400 }
       )
     }
 
-    // Here you would typically send an email
-    // For now, we'll just log the contact form data
+    // Validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    if (!emailRegex.test(email)) {
+      return NextResponse.json(
+        { error: 'Please enter a valid email address' },
+        { status: 400 }
+      )
+    }
+
+    // Log the contact form submission
     console.log('Contact Form Submission:', {
       name,
       email,
@@ -23,11 +31,15 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString()
     })
 
-    // You can integrate with services like:
-    // - EmailJS
+    // For now, we'll simulate a successful email send
+    // In production, you would integrate with:
+    // - EmailJS (easiest)
     // - SendGrid
     // - Nodemailer
     // - Vercel's built-in email service
+
+    // Simulate email sending delay
+    await new Promise(resolve => setTimeout(resolve, 1000))
 
     return NextResponse.json(
       { 
@@ -39,7 +51,7 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Contact form error:', error)
     return NextResponse.json(
-      { error: 'Internal server error' },
+      { error: 'Internal server error. Please try again later.' },
       { status: 500 }
     )
   }

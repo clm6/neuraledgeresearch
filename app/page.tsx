@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { motion } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 import { 
   BarChart3, 
   Zap, 
@@ -28,31 +29,30 @@ export default function Home() {
     setSubmitMessage('')
 
     const formData = new FormData(e.currentTarget)
-    const data = {
+    const templateParams = {
       name: formData.get('name'),
       email: formData.get('email'),
       service: formData.get('service'),
-      message: formData.get('message')
+      message: formData.get('message'),
+      from_email: formData.get('email') // Add sender's email as from address
     }
 
     try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
+      const result = await emailjs.send(
+        'service_5bzx7k7', // Your EmailJS service ID
+        'template_17i6q0j', // Your EmailJS template ID
+        templateParams,
+        'm8X1fD3AJ5d89R-Z6' // Your EmailJS public key
+      )
 
-      const result = await response.json()
-
-      if (response.ok) {
+      if (result.status === 200) {
         setSubmitMessage('Thank you for your message! We will get back to you soon.')
         e.currentTarget.reset()
       } else {
         setSubmitMessage('There was an error sending your message. Please try again.')
       }
     } catch (error) {
+      console.error('Email error:', error)
       setSubmitMessage('There was an error sending your message. Please try again.')
     } finally {
       setIsSubmitting(false)
