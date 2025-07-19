@@ -39,7 +39,7 @@ export default function Home() {
 
     try {
       const result = await emailjs.send(
-        'service_5bzx7k7', // Your EmailJS service ID
+        'service_4kbbx8s', // Your Gmail service ID
         'template_17i6q0j', // Your EmailJS template ID
         templateParams,
         'm8X1fD3AJ5d89R-Z6' // Your EmailJS public key
