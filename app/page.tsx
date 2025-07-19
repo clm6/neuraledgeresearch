@@ -338,7 +338,7 @@ export default function Home() {
                   </div>
                   <div>
                     <p className="text-sm text-gray-500">Phone</p>
-                    <p className="text-lg font-semibold text-gray-900">Available upon request</p>
+                    <p className="text-lg font-semibold text-gray-900">843-718-5163</p>
                   </div>
                 </div>
               </div>
