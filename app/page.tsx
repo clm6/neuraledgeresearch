@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import emailjs from '@emailjs/browser'
 import { 
@@ -22,6 +22,11 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
+
+  // Initialize EmailJS
+  useEffect(() => {
+    emailjs.init('m8X1fD3AJ5d89R-Z6')
+  }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -45,14 +50,17 @@ export default function Home() {
         'm8X1fD3AJ5d89R-Z6' // Your EmailJS public key
       )
 
-      if (result.status === 200) {
+      console.log('EmailJS result:', result)
+      
+      if (result.status === 200 || result.status === 0) {
         setSubmitMessage('Thank you for your message! We will get back to you soon.')
         e.currentTarget.reset()
       } else {
+        console.error('EmailJS error status:', result.status)
         setSubmitMessage('There was an error sending your message. Please try again.')
       }
     } catch (error) {
-      console.error('Email error:', error)
+      console.error('EmailJS error:', error)
       setSubmitMessage('There was an error sending your message. Please try again.')
     } finally {
       setIsSubmitting(false)
