@@ -22,6 +22,7 @@ export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
+  const formRef = React.useRef<HTMLFormElement>(null)
 
   // Initialize EmailJS
   useEffect(() => {
@@ -54,7 +55,10 @@ export default function Home() {
       
       if (result.status === 200 || result.status === 0) {
         setSubmitMessage('Thank you for your message! We will get back to you soon.')
-        e.currentTarget.reset()
+        // Reset form safely
+        if (formRef.current) {
+          formRef.current.reset()
+        }
       } else {
         console.error('EmailJS error status:', result.status)
         setSubmitMessage('There was an error sending your message. Please try again.')
@@ -370,7 +374,7 @@ export default function Home() {
               className="card"
             >
               <h3 className="text-2xl font-semibold text-gray-900 mb-6">Start Your Project</h3>
-              <form className="space-y-6" onSubmit={handleSubmit}>
+              <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                     Name
