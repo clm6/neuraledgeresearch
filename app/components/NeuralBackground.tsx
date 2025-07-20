@@ -85,15 +85,15 @@ export default function NeuralBackground() {
 
         // Draw node
         ctx.beginPath()
-        ctx.arc(node.x, node.y, 2.5, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.95)'
+        ctx.arc(node.x, node.y, 1.5, 0, Math.PI * 2)
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.3)'
         ctx.fill()
 
         // Draw node glow
         ctx.beginPath()
-        ctx.arc(node.x, node.y, 10, 0, Math.PI * 2)
-        const glowGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 10)
-        glowGradient.addColorStop(0, 'rgba(59, 130, 246, 0.5)')
+        ctx.arc(node.x, node.y, 6, 0, Math.PI * 2)
+        const glowGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 6)
+        glowGradient.addColorStop(0, 'rgba(59, 130, 246, 0.1)')
         glowGradient.addColorStop(1, 'rgba(59, 130, 246, 0)')
         ctx.fillStyle = glowGradient
         ctx.fill()
@@ -113,8 +113,8 @@ export default function NeuralBackground() {
             ctx.beginPath()
             ctx.moveTo(fromNode.x, fromNode.y)
             ctx.lineTo(toNode.x, toNode.y)
-            ctx.strokeStyle = `rgba(59, 130, 246, ${connection.opacity + 0.5})`
-            ctx.lineWidth = 2
+            ctx.strokeStyle = `rgba(59, 130, 246, ${connection.opacity + 0.1})`
+            ctx.lineWidth = 1
             ctx.stroke()
           }
         }
@@ -135,9 +135,9 @@ export default function NeuralBackground() {
   }, [])
 
   const drawCircuitPatterns = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
-    // Draw more prominent circuit board patterns
-    ctx.strokeStyle = 'rgba(59, 130, 246, 0.4)'
-    ctx.lineWidth = 2
+    // Draw very light circuit board patterns
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.08)'
+    ctx.lineWidth = 0.5
 
     // Primary horizontal circuit lines
     for (let y = 0; y < height; y += 80) {
@@ -156,8 +156,8 @@ export default function NeuralBackground() {
     }
 
     // Secondary circuit lines (thinner)
-    ctx.strokeStyle = 'rgba(59, 130, 246, 0.25)'
-    ctx.lineWidth = 1
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.04)'
+    ctx.lineWidth = 0.3
     
     // Secondary horizontal lines
     for (let y = 40; y < height; y += 80) {
@@ -180,15 +180,15 @@ export default function NeuralBackground() {
       for (let y = 0; y < height; y += 80) {
         // Primary nodes
         ctx.beginPath()
-        ctx.arc(x, y, 3, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.8)'
+        ctx.arc(x, y, 1, 0, Math.PI * 2)
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.15)'
         ctx.fill()
         
         // Node glow
         ctx.beginPath()
-        ctx.arc(x, y, 12, 0, Math.PI * 2)
-        const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, 12)
-        glowGradient.addColorStop(0, 'rgba(59, 130, 246, 0.3)')
+        ctx.arc(x, y, 4, 0, Math.PI * 2)
+        const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, 4)
+        glowGradient.addColorStop(0, 'rgba(59, 130, 246, 0.05)')
         glowGradient.addColorStop(1, 'rgba(59, 130, 246, 0)')
         ctx.fillStyle = glowGradient
         ctx.fill()
@@ -196,10 +196,10 @@ export default function NeuralBackground() {
     }
 
     // Circuit traces (diagonal connections)
-    ctx.strokeStyle = 'rgba(59, 130, 246, 0.5)'
-    ctx.lineWidth = 2.5
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.06)'
+    ctx.lineWidth = 0.5
     
-    for (let i = 0; i < 20; i++) {
+    for (let i = 0; i < 15; i++) {
       const x1 = Math.random() * width
       const y1 = Math.random() * height
       const x2 = x1 + (Math.random() - 0.5) * 200
@@ -213,13 +213,13 @@ export default function NeuralBackground() {
         
         // Add small nodes at trace endpoints
         ctx.beginPath()
-        ctx.arc(x1, y1, 2, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.8)'
+        ctx.arc(x1, y1, 0.8, 0, Math.PI * 2)
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.1)'
         ctx.fill()
         
         ctx.beginPath()
-        ctx.arc(x2, y2, 2, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.8)'
+        ctx.arc(x2, y2, 0.8, 0, Math.PI * 2)
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.1)'
         ctx.fill()
       }
     }
@@ -230,8 +230,8 @@ export default function NeuralBackground() {
       const y = Math.random() * height
       
       // Draw small circuit component symbols
-      ctx.strokeStyle = 'rgba(59, 130, 246, 0.6)'
-      ctx.lineWidth = 2.5
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.08)'
+      ctx.lineWidth = 0.5
       
       // Resistor symbol (zigzag)
       if (i % 3 === 0) {
@@ -264,7 +264,7 @@ export default function NeuralBackground() {
       <canvas
         ref={canvasRef}
         className="fixed inset-0 pointer-events-none z-0"
-        style={{ opacity: 0.9 }}
+        style={{ opacity: 0.15 }}
       />
     )
 } 
