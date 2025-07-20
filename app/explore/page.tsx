@@ -109,48 +109,6 @@ export default function ExplorePage() {
         </div>
       </section>
 
-      {/* Featured Blog Post */}
-      <section className="py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Latest Research</h2>
-          
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="mb-16"
-          >
-            {blogPosts.filter(post => post.featured).map((post) => (
-              <div key={post.id} className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
-                <div className="flex items-center mb-4">
-                  <div className="text-primary-600 mr-3">
-                    {getIconComponent(post.icon)}
-                  </div>
-                  <span className="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
-                    {post.category}
-                  </span>
-                </div>
-                <h3 className="text-2xl font-bold text-gray-900 mb-4">{post.title}</h3>
-                <p className="text-gray-800 mb-6 text-lg font-semibold">{post.excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-gray-700 font-semibold">
-                    <span className="flex items-center">
-                      <Calendar className="w-4 h-4 mr-1" />
-                      {post.date}
-                    </span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <button className="btn-primary inline-flex items-center">
-                    Read More
-                    <ExternalLink className="ml-2 w-4 h-4" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </motion.div>
-        </div>
-      </section>
-
       {/* Blog Posts Grid */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -209,6 +167,52 @@ export default function ExplorePage() {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* Latest Research Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Latest Research</h2>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            <div className="text-center">
+              <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                Current research initiatives and ongoing projects in data analytics, power systems, and machine learning.
+              </p>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div className="bg-white rounded-xl p-6 border border-gray-100">
+                  <div className="text-primary-600 mb-4">
+                    <Zap className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Grid Optimization</h3>
+                  <p className="text-gray-800 mb-4">Advanced analytics for power system reliability and efficiency.</p>
+                  <span className="text-sm text-primary-600 bg-primary-50 px-3 py-1 rounded-full">In Progress</span>
+                </div>
+                <div className="bg-white rounded-xl p-6 border border-gray-100">
+                  <div className="text-primary-600 mb-4">
+                    <Brain className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">ML Pipeline Development</h3>
+                  <p className="text-gray-800 mb-4">Scalable machine learning solutions for enterprise applications.</p>
+                  <span className="text-sm text-primary-600 bg-primary-50 px-3 py-1 rounded-full">Active</span>
+                </div>
+                <div className="bg-white rounded-xl p-6 border border-gray-100">
+                  <div className="text-primary-600 mb-4">
+                    <Code className="w-8 h-8" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-900 mb-3">Spatial Analytics</h3>
+                  <p className="text-gray-800 mb-4">Geospatial analysis and location intelligence solutions.</p>
+                  <span className="text-sm text-primary-600 bg-primary-50 px-3 py-1 rounded-full">Planning</span>
+                </div>
+              </div>
+            </div>
+          </motion.div>
         </div>
       </section>
 
