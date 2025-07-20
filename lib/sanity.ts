@@ -1,4 +1,5 @@
 import { createClient } from 'next-sanity'
+import imageUrlBuilder from '@sanity/image-url'
 
 export const client = createClient({
   projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID || 'your-project-id',
@@ -8,8 +9,10 @@ export const client = createClient({
 })
 
 // Helper function to get image URL with proper sizing
+const builder = imageUrlBuilder(client)
+
 export function urlFor(source: any) {
-  return client.image(source).auto('format').fit('max')
+  return builder.image(source)
 }
 
 // GROQ queries for fetching data
