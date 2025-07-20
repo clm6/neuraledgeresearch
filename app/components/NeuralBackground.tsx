@@ -86,14 +86,14 @@ export default function NeuralBackground() {
         // Draw node
         ctx.beginPath()
         ctx.arc(node.x, node.y, 2, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.6)'
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.8)'
         ctx.fill()
 
         // Draw node glow
         ctx.beginPath()
-        ctx.arc(node.x, node.y, 6, 0, Math.PI * 2)
-        const glowGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 6)
-        glowGradient.addColorStop(0, 'rgba(59, 130, 246, 0.2)')
+        ctx.arc(node.x, node.y, 8, 0, Math.PI * 2)
+        const glowGradient = ctx.createRadialGradient(node.x, node.y, 0, node.x, node.y, 8)
+        glowGradient.addColorStop(0, 'rgba(59, 130, 246, 0.3)')
         glowGradient.addColorStop(1, 'rgba(59, 130, 246, 0)')
         ctx.fillStyle = glowGradient
         ctx.fill()
@@ -113,8 +113,8 @@ export default function NeuralBackground() {
             ctx.beginPath()
             ctx.moveTo(fromNode.x, fromNode.y)
             ctx.lineTo(toNode.x, toNode.y)
-            ctx.strokeStyle = `rgba(59, 130, 246, ${connection.opacity * (1 - distance / 150)})`
-            ctx.lineWidth = 1
+            ctx.strokeStyle = `rgba(59, 130, 246, ${(connection.opacity + 0.2) * (1 - distance / 150)})`
+            ctx.lineWidth = 1.5
             ctx.stroke()
           }
         }
@@ -135,20 +135,40 @@ export default function NeuralBackground() {
   }, [])
 
   const drawCircuitPatterns = (ctx: CanvasRenderingContext2D, width: number, height: number) => {
-    // Draw subtle circuit board patterns
-    ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)'
+    // Draw more prominent circuit board patterns
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.15)'
     ctx.lineWidth = 1
 
-    // Horizontal circuit lines
-    for (let y = 0; y < height; y += 100) {
+    // Primary horizontal circuit lines
+    for (let y = 0; y < height; y += 80) {
       ctx.beginPath()
       ctx.moveTo(0, y)
       ctx.lineTo(width, y)
       ctx.stroke()
     }
 
-    // Vertical circuit lines
-    for (let x = 0; x < width; x += 150) {
+    // Primary vertical circuit lines
+    for (let x = 0; x < width; x += 120) {
+      ctx.beginPath()
+      ctx.moveTo(x, 0)
+      ctx.lineTo(x, height)
+      ctx.stroke()
+    }
+
+    // Secondary circuit lines (thinner)
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.08)'
+    ctx.lineWidth = 0.5
+    
+    // Secondary horizontal lines
+    for (let y = 40; y < height; y += 80) {
+      ctx.beginPath()
+      ctx.moveTo(0, y)
+      ctx.lineTo(width, y)
+      ctx.stroke()
+    }
+
+    // Secondary vertical lines
+    for (let x = 60; x < width; x += 120) {
       ctx.beginPath()
       ctx.moveTo(x, 0)
       ctx.lineTo(x, height)
@@ -156,21 +176,95 @@ export default function NeuralBackground() {
     }
 
     // Circuit nodes at intersections
-    for (let x = 0; x < width; x += 150) {
-      for (let y = 0; y < height; y += 100) {
+    for (let x = 0; x < width; x += 120) {
+      for (let y = 0; y < height; y += 80) {
+        // Primary nodes
         ctx.beginPath()
-        ctx.arc(x, y, 1, 0, Math.PI * 2)
+        ctx.arc(x, y, 2, 0, Math.PI * 2)
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.4)'
+        ctx.fill()
+        
+        // Node glow
+        ctx.beginPath()
+        ctx.arc(x, y, 8, 0, Math.PI * 2)
+        const glowGradient = ctx.createRadialGradient(x, y, 0, x, y, 8)
+        glowGradient.addColorStop(0, 'rgba(59, 130, 246, 0.15)')
+        glowGradient.addColorStop(1, 'rgba(59, 130, 246, 0)')
+        ctx.fillStyle = glowGradient
+        ctx.fill()
+      }
+    }
+
+    // Circuit traces (diagonal connections)
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)'
+    ctx.lineWidth = 1
+    
+    for (let i = 0; i < 20; i++) {
+      const x1 = Math.random() * width
+      const y1 = Math.random() * height
+      const x2 = x1 + (Math.random() - 0.5) * 200
+      const y2 = y1 + (Math.random() - 0.5) * 200
+      
+      if (x2 >= 0 && x2 <= width && y2 >= 0 && y2 <= height) {
+        ctx.beginPath()
+        ctx.moveTo(x1, y1)
+        ctx.lineTo(x2, y2)
+        ctx.stroke()
+        
+        // Add small nodes at trace endpoints
+        ctx.beginPath()
+        ctx.arc(x1, y1, 1, 0, Math.PI * 2)
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.3)'
+        ctx.fill()
+        
+        ctx.beginPath()
+        ctx.arc(x2, y2, 1, 0, Math.PI * 2)
         ctx.fillStyle = 'rgba(59, 130, 246, 0.3)'
         ctx.fill()
       }
     }
+
+    // Circuit components (resistors, capacitors symbols)
+    for (let i = 0; i < 15; i++) {
+      const x = Math.random() * width
+      const y = Math.random() * height
+      
+      // Draw small circuit component symbols
+      ctx.strokeStyle = 'rgba(59, 130, 246, 0.2)'
+      ctx.lineWidth = 1.5
+      
+      // Resistor symbol (zigzag)
+      if (i % 3 === 0) {
+        ctx.beginPath()
+        ctx.moveTo(x - 15, y)
+        ctx.lineTo(x - 5, y - 8)
+        ctx.lineTo(x + 5, y + 8)
+        ctx.lineTo(x + 15, y)
+        ctx.stroke()
+      }
+      // Capacitor symbol (parallel lines)
+      else if (i % 3 === 1) {
+        ctx.beginPath()
+        ctx.moveTo(x - 15, y - 8)
+        ctx.lineTo(x - 15, y + 8)
+        ctx.moveTo(x + 15, y - 8)
+        ctx.lineTo(x + 15, y + 8)
+        ctx.stroke()
+      }
+      // Inductor symbol (curved lines)
+      else {
+        ctx.beginPath()
+        ctx.arc(x, y, 8, 0, Math.PI)
+        ctx.stroke()
+      }
+    }
   }
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="fixed inset-0 pointer-events-none z-0"
-      style={{ opacity: 0.3 }}
-    />
-  )
+      return (
+      <canvas
+        ref={canvasRef}
+        className="fixed inset-0 pointer-events-none z-0"
+        style={{ opacity: 0.5 }}
+      />
+    )
 } 
