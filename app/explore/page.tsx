@@ -5,51 +5,28 @@ import { ArrowLeft, Calendar, Tag, ExternalLink, Brain, Code, BarChart3, Zap, Se
 import Link from 'next/link'
 import NeuralBackground from '../components/NeuralBackground'
 import { useState, useMemo } from 'react'
+import { blogPosts } from '../data/blogPosts'
 
 
 
 export default function ExplorePage() {
   const [searchTerm, setSearchTerm] = useState('')
   
-  const blogPosts = [
-    {
-      id: 1,
-      title: "The Future of Power System Analytics",
-      excerpt: "Exploring how machine learning is revolutionizing grid optimization and outage prediction in modern power systems.",
-      category: "Power Systems",
-      date: "2024-07-19",
-      readTime: "5 min read",
-      icon: <Zap className="w-6 h-6" />,
-      featured: true
-    },
-    {
-      id: 2,
-      title: "Building Scalable AI/ML Pipelines",
-      excerpt: "Lessons learned from developing production-ready machine learning pipelines for enterprise applications.",
-      category: "AI/ML",
-      date: "2024-07-15",
-      readTime: "8 min read",
-      icon: <Brain className="w-6 h-6" />
-    },
-    {
-      id: 3,
-      title: "ArcGIS and Spatial Analytics in 2024",
-      excerpt: "How geospatial analytics and machine learning are transforming location-based decision making.",
-      category: "Geospatial",
-      date: "2024-07-10",
-      readTime: "6 min read",
-      icon: <Code className="w-6 h-6" />
-    },
-    {
-      id: 4,
-      title: "Data-Driven Business Intelligence",
-      excerpt: "Modern approaches to transforming raw business data into actionable insights and strategic recommendations.",
-      category: "Business Analytics",
-      date: "2024-07-05",
-      readTime: "7 min read",
-      icon: <BarChart3 className="w-6 h-6" />
+  // Function to convert icon string to React component
+  const getIconComponent = (iconName: string) => {
+    switch (iconName) {
+      case 'Zap':
+        return <Zap className="w-6 h-6" />
+      case 'Brain':
+        return <Brain className="w-6 h-6" />
+      case 'Code':
+        return <Code className="w-6 h-6" />
+      case 'BarChart3':
+        return <BarChart3 className="w-6 h-6" />
+      default:
+        return <Zap className="w-6 h-6" />
     }
-  ]
+  }
 
   // Filter posts based on search term
   const filteredPosts = useMemo(() => {
@@ -147,7 +124,7 @@ export default function ExplorePage() {
               <div key={post.id} className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
                 <div className="flex items-center mb-4">
                   <div className="text-primary-600 mr-3">
-                    {post.icon}
+                    {getIconComponent(post.icon)}
                   </div>
                   <span className="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
                     {post.category}
@@ -209,7 +186,7 @@ export default function ExplorePage() {
               >
                 <div className="flex items-center mb-4">
                   <div className="text-primary-600 mr-3">
-                    {post.icon}
+                    {getIconComponent(post.icon)}
                   </div>
                   <span className="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
                     {post.category}
