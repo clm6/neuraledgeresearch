@@ -1,0 +1,259 @@
+'use client'
+
+import { motion } from 'framer-motion'
+import { ArrowLeft, Calendar, Tag, ExternalLink, Brain, Code, BarChart3, Zap } from 'lucide-react'
+import Link from 'next/link'
+
+export default function ExplorePage() {
+  const blogPosts = [
+    {
+      id: 1,
+      title: "The Future of Power System Analytics",
+      excerpt: "Exploring how machine learning is revolutionizing grid optimization and outage prediction in modern power systems.",
+      category: "Power Systems",
+      date: "2024-07-19",
+      readTime: "5 min read",
+      icon: <Zap className="w-6 h-6" />,
+      featured: true
+    },
+    {
+      id: 2,
+      title: "Building Scalable AI/ML Pipelines",
+      excerpt: "Lessons learned from developing production-ready machine learning pipelines for enterprise applications.",
+      category: "AI/ML",
+      date: "2024-07-15",
+      readTime: "8 min read",
+      icon: <Brain className="w-6 h-6" />
+    },
+    {
+      id: 3,
+      title: "ArcGIS and Spatial Analytics in 2024",
+      excerpt: "How geospatial analytics and machine learning are transforming location-based decision making.",
+      category: "Geospatial",
+      date: "2024-07-10",
+      readTime: "6 min read",
+      icon: <Code className="w-6 h-6" />
+    },
+    {
+      id: 4,
+      title: "Data-Driven Business Intelligence",
+      excerpt: "Modern approaches to transforming raw business data into actionable insights and strategic recommendations.",
+      category: "Business Analytics",
+      date: "2024-07-05",
+      readTime: "7 min read",
+      icon: <BarChart3 className="w-6 h-6" />
+    }
+  ]
+
+  const researchAreas = [
+    {
+      title: "Power System Optimization",
+      description: "Advanced analytics for grid performance, load forecasting, and outage prediction",
+      status: "Active Research"
+    },
+    {
+      title: "Machine Learning Pipelines",
+      description: "End-to-end ML solutions from data preprocessing to model deployment",
+      status: "In Development"
+    },
+    {
+      title: "Geospatial Analytics",
+      description: "Spatial analysis and location intelligence using ArcGIS and custom solutions",
+      status: "Exploring"
+    },
+    {
+      title: "Business Intelligence",
+      description: "Data visualization, KPI tracking, and predictive analytics for business growth",
+      status: "Active Research"
+    }
+  ]
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <Link href="/" className="text-2xl font-bold text-gradient">NeuralEdge Research</Link>
+            </div>
+            
+            <div className="hidden md:flex items-center space-x-8">
+              <Link href="/#services" className="text-gray-700 hover:text-primary-600 transition-colors">Services</Link>
+              <Link href="/#about" className="text-gray-700 hover:text-primary-600 transition-colors">About</Link>
+              <Link href="/#contact" className="text-gray-700 hover:text-primary-600 transition-colors">Contact</Link>
+              <Link href="/#contact" className="btn-primary">Get Started</Link>
+            </div>
+          </div>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 gradient-bg">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+            >
+              <Link href="/" className="inline-flex items-center text-primary-600 hover:text-primary-700 mb-8">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Home
+              </Link>
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
+                What I'm
+                <span className="text-gradient block">Exploring</span>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+                Research, insights, and discoveries in data analytics, AI/ML, and power systems. 
+                Sharing knowledge and exploring the cutting edge of technology.
+              </p>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Featured Blog Post */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Latest Research</h2>
+          
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            {blogPosts.filter(post => post.featured).map((post) => (
+              <div key={post.id} className="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+                <div className="flex items-center mb-4">
+                  <div className="text-primary-600 mr-3">
+                    {post.icon}
+                  </div>
+                  <span className="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
+                    {post.category}
+                  </span>
+                </div>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4">{post.title}</h3>
+                <p className="text-gray-600 mb-6 text-lg">{post.excerpt}</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4 text-sm text-gray-500">
+                    <span className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {post.date}
+                    </span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <button className="btn-primary inline-flex items-center">
+                    Read More
+                    <ExternalLink className="ml-2 w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
+      {/* Blog Posts Grid */}
+      <section className="py-16 bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Recent Posts</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {blogPosts.filter(post => !post.featured).map((post, index) => (
+              <motion.div
+                key={post.id}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white rounded-xl shadow-lg p-6 border border-gray-100 hover:shadow-xl transition-shadow"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="text-primary-600 mr-3">
+                    {post.icon}
+                  </div>
+                  <span className="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
+                    {post.category}
+                  </span>
+                </div>
+                <h3 className="text-xl font-bold text-gray-900 mb-3">{post.title}</h3>
+                <p className="text-gray-600 mb-4">{post.excerpt}</p>
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-4 text-sm text-gray-500">
+                    <span className="flex items-center">
+                      <Calendar className="w-4 h-4 mr-1" />
+                      {post.date}
+                    </span>
+                    <span>{post.readTime}</span>
+                  </div>
+                  <button className="text-primary-600 hover:text-primary-700 font-medium">
+                    Read More →
+                  </button>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Research Areas */}
+      <section className="py-16 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Research Areas</h2>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {researchAreas.map((area, index) => (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, x: index % 2 === 0 ? -20 : 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                className="bg-white rounded-xl p-6 border border-gray-100"
+              >
+                <div className="flex items-start justify-between mb-4">
+                  <h3 className="text-xl font-semibold text-gray-900">{area.title}</h3>
+                  <span className={`text-sm px-3 py-1 rounded-full ${
+                    area.status === 'Active Research' ? 'bg-green-100 text-green-700' :
+                    area.status === 'In Development' ? 'bg-blue-100 text-blue-700' :
+                    'bg-yellow-100 text-yellow-700'
+                  }`}>
+                    {area.status}
+                  </span>
+                </div>
+                <p className="text-gray-600">{area.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+          >
+            <h2 className="text-3xl font-bold text-gray-900 mb-6">Ready to Collaborate?</h2>
+            <p className="text-xl text-gray-600 mb-8">
+              Let's work together on your next data analytics project or research initiative.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link href="/#contact" className="btn-primary inline-flex items-center">
+                Let's Work Together
+                <ExternalLink className="ml-2 w-5 h-5" />
+              </Link>
+              <Link href="/#services" className="btn-secondary inline-flex items-center">
+                Explore Services
+                <ExternalLink className="ml-2 w-5 h-5" />
+              </Link>
+            </div>
+          </motion.div>
+        </div>
+      </section>
+    </div>
+  )
+} 

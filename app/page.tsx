@@ -124,6 +124,7 @@ export default function Home() {
             <div className="hidden md:flex items-center space-x-8">
               <a href="#services" className="text-gray-700 hover:text-primary-600 transition-colors">Services</a>
               <a href="#about" className="text-gray-700 hover:text-primary-600 transition-colors">About</a>
+              <a href="/explore" className="text-gray-700 hover:text-primary-600 transition-colors">Explore</a>
               <a href="#contact" className="text-gray-700 hover:text-primary-600 transition-colors">Contact</a>
               <a href="#contact" className="btn-primary">Get Started</a>
             </div>
@@ -172,12 +173,12 @@ export default function Home() {
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <a href="#contact" className="btn-primary inline-flex items-center">
-                  Start Your Project
+                  Let's Work Together
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
-                <a href="#services" className="btn-secondary inline-flex items-center">
-                  Explore Services
-                  <ChevronDown className="ml-2 w-5 h-5" />
+                <a href="/explore" className="btn-secondary inline-flex items-center">
+                  Explore Projects
+                  <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
               </div>
             </motion.div>
