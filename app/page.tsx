@@ -19,7 +19,6 @@ import {
   ExternalLink
 } from 'lucide-react'
 import NeuralBackground from './components/NeuralBackground'
-import { getRecentPosts } from './data/blogPosts'
 
 
 
@@ -239,77 +238,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Recent Posts Section */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <h2 className="text-4xl font-bold text-gray-900 mb-4">Recent Research & Insights</h2>
-              <p className="text-xl text-gray-800 max-w-3xl mx-auto font-semibold">
-                Latest articles and case studies from our data analytics and power systems research.
-              </p>
-            </motion.div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {getRecentPosts(3).map((post, index) => (
-              <motion.div
-                key={post.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="card group hover:border-primary-200 transition-all duration-200 hover:shadow-lg"
-              >
-                <div className="flex items-center mb-4">
-                  <div className="text-primary-600 mr-3">
-                    {post.icon === 'Zap' && <Zap className="w-6 h-6" />}
-                    {post.icon === 'Brain' && <Brain className="w-6 h-6" />}
-                    {post.icon === 'Code' && <Code className="w-6 h-6" />}
-                    {post.icon === 'BarChart3' && <BarChart3 className="w-6 h-6" />}
-                  </div>
-                  <span className="text-sm font-medium text-primary-600 bg-primary-50 px-3 py-1 rounded-full">
-                    {post.category}
-                  </span>
-                </div>
-                <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-primary-600 transition-colors">
-                  {post.title}
-                </h3>
-                <p className="text-gray-800 mb-4 font-semibold">{post.excerpt}</p>
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-gray-700 font-semibold">
-                    <span>{post.date}</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <a href="/explore" className="text-primary-600 hover:text-primary-700 font-semibold inline-flex items-center group">
-                    Read More
-                    <ExternalLink className="ml-1 w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </a>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-
-          <div className="text-center mt-12">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-              viewport={{ once: true }}
-            >
-              <a href="/explore" className="btn-secondary inline-flex items-center">
-                View All Posts
-                <ArrowRight className="ml-2 w-5 h-5" />
-              </a>
-            </motion.div>
-          </div>
-        </div>
-      </section>
 
       {/* About Section */}
       <section id="about" className="py-20 bg-white">
