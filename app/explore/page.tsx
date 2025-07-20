@@ -1,13 +1,16 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { ArrowLeft, Calendar, Tag, ExternalLink, Brain, Code, BarChart3, Zap } from 'lucide-react'
+import { ArrowLeft, Calendar, Tag, ExternalLink, Brain, Code, BarChart3, Zap, Search } from 'lucide-react'
 import Link from 'next/link'
 import NeuralBackground from '../components/NeuralBackground'
+import { useState, useMemo } from 'react'
 
 
 
 export default function ExplorePage() {
+  const [searchTerm, setSearchTerm] = useState('')
+  
   const blogPosts = [
     {
       id: 1,
@@ -47,6 +50,17 @@ export default function ExplorePage() {
       icon: <BarChart3 className="w-6 h-6" />
     }
   ]
+
+  // Filter posts based on search term
+  const filteredPosts = useMemo(() => {
+    if (!searchTerm) return blogPosts
+    
+    return blogPosts.filter(post => 
+      post.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      post.category.toLowerCase().includes(searchTerm.toLowerCase())
+    )
+  }, [searchTerm, blogPosts])
 
   const researchAreas = [
     {
@@ -163,10 +177,29 @@ export default function ExplorePage() {
       {/* Blog Posts Grid */}
       <section className="py-16 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-gray-900 mb-12 text-center">Recent Posts</h2>
+          <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">Recent Posts</h2>
+          
+          {/* Search Bar */}
+          <div className="max-w-md mx-auto mb-12">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+              <input
+                type="text"
+                placeholder="Search posts by title, content, or category..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+              />
+            </div>
+            {searchTerm && (
+              <p className="text-sm text-gray-600 mt-2 text-center">
+                Showing {filteredPosts.length} of {blogPosts.length} posts
+              </p>
+            )}
+          </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {blogPosts.filter(post => !post.featured).map((post, index) => (
+            {filteredPosts.filter(post => !post.featured).map((post, index) => (
               <motion.div
                 key={post.id}
                 initial={{ opacity: 0, y: 20 }}
