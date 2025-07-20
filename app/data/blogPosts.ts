@@ -80,17 +80,17 @@ export const blogPosts: BlogPost[] = [
       ## Real-World Implementation
 
       ### Data Processing Pipeline
-      ```python
+      \`\`\`python
       # Time alignment of weather data with outage records
       def align_weather_outage_data(weather_df, outage_df):
           # Merge weather conditions with outage events
           # Handle missing values and outliers
           # Create temporal features
           return processed_data
-      ```
+      \`\`\`
 
       ### Model Training
-      ```python
+      \`\`\`python
       # LSTM for sequence modeling
       lstm_model = Sequential([
           LSTM(64, return_sequences=True, input_shape=(24, features)),
@@ -98,16 +98,16 @@ export const blogPosts: BlogPost[] = [
           LSTM(32),
           Dense(1, activation='sigmoid')
       ])
-      ```
+      \`\`\`
 
       ### Real-Time Predictions
-      ```python
+      \`\`\`python
       # Get predictions for specific region
       predictions = predictor.predict_outages(
           region_id="123", 
           horizon_hours=72
       )
-      ```
+      \`\`\`
 
       ## Key Innovations
 
