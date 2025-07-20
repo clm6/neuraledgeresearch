@@ -105,9 +105,9 @@ export default function ExplorePage() {
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Back to Home
               </Link>
-              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
+              <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8" style={{ lineHeight: '1.3', marginBottom: '2rem' }}>
                 What I'm
-                <span className="text-gradient block">Exploring</span>
+                <span className="text-gradient block" style={{ lineHeight: '1.4', marginBottom: '0.5rem' }}>Exploring</span>
               </h1>
               <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
                 Research, insights, and discoveries in data analytics, AI/ML, and power systems. 
