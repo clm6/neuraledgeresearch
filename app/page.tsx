@@ -153,13 +153,13 @@ export default function Home() {
                 <a href="#services" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Services</a>
                 <a href="#about" className="block px-3 py-2 text-gray-700 hover:text-primary-600">About</a>
                 <a href="/explore" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Research</a>
-                <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Contact</a>
-                <a href="#contact" className="block px-3 py-2 btn-primary text-center">Get Started</a>
+                      <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Contact</a>
+                      <a href="#contact" className="block px-3 py-2 btn-primary text-center">Get Started</a>
+                    </div>
+                  </div>
+                )}
               </div>
-            </div>
-          )}
-        </div>
-      </nav>
+            </nav>
 
       {/* Hero Section */}
       <section className="pt-24 pb-24 gradient-bg">
