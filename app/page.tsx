@@ -199,7 +199,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl font-bold text-gray-900 mb-4">Our Services</h2>
-              <p className="text-xl text-gray-700 max-w-3xl mx-auto font-medium">
+              <p className="text-xl text-gray-800 max-w-3xl mx-auto font-semibold">
                 Comprehensive data analytics solutions tailored to your specific industry and business needs.
               </p>
             </motion.div>
@@ -219,7 +219,7 @@ export default function Home() {
                   {service.icon}
                 </div>
                 <h3 className="text-xl font-semibold text-gray-900 mb-3">{service.title}</h3>
-                <p className="text-gray-700 mb-4 font-medium">{service.description}</p>
+                <p className="text-gray-800 mb-4 font-semibold">{service.description}</p>
                 <ul className="space-y-2">
                   {service.features.map((feature, featureIndex) => (
                     <li key={featureIndex} className="text-sm text-gray-500 flex items-center">
@@ -252,7 +252,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">Expert Knowledge</h3>
-                    <p className="text-gray-700 font-medium">Deep expertise in data analytics, machine learning, and industry-specific solutions.</p>
+                    <p className="text-gray-800 font-semibold">Deep expertise in data analytics, machine learning, and industry-specific solutions.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -261,7 +261,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">Modern Technology</h3>
-                    <p className="text-gray-700 font-medium">Cutting-edge tools and frameworks for scalable, production-ready solutions.</p>
+                    <p className="text-gray-800 font-semibold">Cutting-edge tools and frameworks for scalable, production-ready solutions.</p>
                   </div>
                 </div>
                 <div className="flex items-start space-x-4">
@@ -270,7 +270,7 @@ export default function Home() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-2">Actionable Insights</h3>
-                    <p className="text-gray-700 font-medium">Transform complex data into clear, actionable insights that drive business decisions.</p>
+                    <p className="text-gray-800 font-semibold">Transform complex data into clear, actionable insights that drive business decisions.</p>
                   </div>
                 </div>
               </div>
@@ -309,7 +309,7 @@ export default function Home() {
               viewport={{ once: true }}
             >
               <h2 className="text-4xl font-bold text-gray-900 mb-4">Get In Touch</h2>
-              <p className="text-xl text-gray-700 max-w-2xl mx-auto font-medium">
+              <p className="text-xl text-gray-800 max-w-2xl mx-auto font-semibold">
                 Ready to start your data analytics project? Contact us to discuss your needs and explore how we can help.
               </p>
             </motion.div>

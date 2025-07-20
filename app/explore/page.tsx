@@ -138,9 +138,9 @@ export default function ExplorePage() {
                   </span>
                 </div>
                 <h3 className="text-2xl font-bold text-gray-900 mb-4">{post.title}</h3>
-                <p className="text-gray-700 mb-6 text-lg font-medium">{post.excerpt}</p>
+                <p className="text-gray-800 mb-6 text-lg font-semibold">{post.excerpt}</p>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-gray-600 font-medium">
+                  <div className="flex items-center space-x-4 text-sm text-gray-700 font-semibold">
                     <span className="flex items-center">
                       <Calendar className="w-4 h-4 mr-1" />
                       {post.date}
@@ -181,9 +181,9 @@ export default function ExplorePage() {
                   </span>
                 </div>
                 <h3 className="text-xl font-bold text-gray-900 mb-3">{post.title}</h3>
-                <p className="text-gray-700 mb-4 font-medium">{post.excerpt}</p>
+                <p className="text-gray-800 mb-4 font-semibold">{post.excerpt}</p>
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-4 text-sm text-gray-600 font-medium">
+                  <div className="flex items-center space-x-4 text-sm text-gray-700 font-semibold">
                     <span className="flex items-center">
                       <Calendar className="w-4 h-4 mr-1" />
                       {post.date}
@@ -224,7 +224,7 @@ export default function ExplorePage() {
                     {area.status}
                   </span>
                 </div>
-                <p className="text-gray-700 font-medium">{area.description}</p>
+                <p className="text-gray-800 font-semibold">{area.description}</p>
               </motion.div>
             ))}
           </div>
