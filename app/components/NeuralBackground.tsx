@@ -47,11 +47,11 @@ export default function NeuralBackground() {
         for (let j = 0; j < connectionCount; j++) {
           const target = Math.floor(Math.random() * nodes.length)
           if (target !== i && !connections.some(c => (c.from === i && c.to === target) || (c.from === target && c.to === i))) {
-            connections.push({
-              from: i,
-              to: target,
-              opacity: Math.random() * 0.3 + 0.1
-            })
+                         connections.push({
+               from: i,
+               to: target,
+               opacity: Math.random() * 0.4 + 0.2
+             })
           }
         }
       }
@@ -113,7 +113,7 @@ export default function NeuralBackground() {
             ctx.beginPath()
             ctx.moveTo(fromNode.x, fromNode.y)
             ctx.lineTo(toNode.x, toNode.y)
-            ctx.strokeStyle = `rgba(59, 130, 246, ${(connection.opacity + 0.2) * (1 - distance / 150)})`
+            ctx.strokeStyle = `rgba(59, 130, 246, ${connection.opacity + 0.3})`
             ctx.lineWidth = 1.5
             ctx.stroke()
           }
@@ -196,8 +196,8 @@ export default function NeuralBackground() {
     }
 
     // Circuit traces (diagonal connections)
-    ctx.strokeStyle = 'rgba(59, 130, 246, 0.1)'
-    ctx.lineWidth = 1
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.2)'
+    ctx.lineWidth = 1.5
     
     for (let i = 0; i < 20; i++) {
       const x1 = Math.random() * width
@@ -213,13 +213,13 @@ export default function NeuralBackground() {
         
         // Add small nodes at trace endpoints
         ctx.beginPath()
-        ctx.arc(x1, y1, 1, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.3)'
+        ctx.arc(x1, y1, 1.5, 0, Math.PI * 2)
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.5)'
         ctx.fill()
         
         ctx.beginPath()
-        ctx.arc(x2, y2, 1, 0, Math.PI * 2)
-        ctx.fillStyle = 'rgba(59, 130, 246, 0.3)'
+        ctx.arc(x2, y2, 1.5, 0, Math.PI * 2)
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.5)'
         ctx.fill()
       }
     }
