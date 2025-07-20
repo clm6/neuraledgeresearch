@@ -192,7 +192,7 @@ export default function CMSPage() {
                   value={formData.excerpt}
                   onChange={(e) => setFormData({...formData, excerpt: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
-                  rows="3"
+                  rows={3}
                 />
               </div>
 
@@ -220,7 +220,7 @@ export default function CMSPage() {
                   value={formData.content}
                   onChange={(e) => setFormData({...formData, content: e.target.value})}
                   className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500"
-                  rows="10"
+                  rows={10}
                 />
               </div>
 
