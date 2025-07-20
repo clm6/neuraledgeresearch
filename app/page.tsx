@@ -65,10 +65,13 @@ export default function Home() {
           client.fetch(blogPostsQuery),
           client.fetch(projectsQuery)
         ])
-        setBlogPosts(posts.slice(0, 3)) // Show only 3 latest posts
-        setProjects(projs.slice(0, 3)) // Show only 3 latest projects
+        setBlogPosts(posts?.slice(0, 3) || []) // Show only 3 latest posts
+        setProjects(projs?.slice(0, 3) || []) // Show only 3 latest projects
       } catch (error) {
         console.error('Error fetching data:', error)
+        // Set empty arrays if Sanity is not available
+        setBlogPosts([])
+        setProjects([])
       }
     }
     

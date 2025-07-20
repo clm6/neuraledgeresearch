@@ -12,7 +12,14 @@ interface Project {
 }
 
 export default async function ProjectsPage() {
-  const projects: Project[] = await client.fetch(projectsQuery)
+  let projects: Project[] = []
+  
+  try {
+    projects = await client.fetch(projectsQuery)
+  } catch (error) {
+    console.error('Error fetching projects:', error)
+    // Return empty array if Sanity is not available
+  }
 
   return (
     <div className="min-h-screen bg-white">

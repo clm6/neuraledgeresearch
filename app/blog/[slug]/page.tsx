@@ -23,7 +23,13 @@ interface BlogPostPageProps {
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const post: BlogPost = await client.fetch(blogPostQuery, { slug: params.slug })
+  let post: BlogPost | null = null
+  
+  try {
+    post = await client.fetch(blogPostQuery, { slug: params.slug })
+  } catch (error) {
+    console.error('Error fetching blog post:', error)
+  }
 
   if (!post) {
     notFound()

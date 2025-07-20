@@ -22,7 +22,13 @@ interface ProjectPageProps {
 }
 
 export default async function ProjectPage({ params }: ProjectPageProps) {
-  const project: Project = await client.fetch(projectQuery, { slug: params.slug })
+  let project: Project | null = null
+  
+  try {
+    project = await client.fetch(projectQuery, { slug: params.slug })
+  } catch (error) {
+    console.error('Error fetching project:', error)
+  }
 
   if (!project) {
     notFound()

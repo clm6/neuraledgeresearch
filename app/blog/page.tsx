@@ -13,7 +13,14 @@ interface BlogPost {
 }
 
 export default async function BlogPage() {
-  const posts: BlogPost[] = await client.fetch(blogPostsQuery)
+  let posts: BlogPost[] = []
+  
+  try {
+    posts = await client.fetch(blogPostsQuery)
+  } catch (error) {
+    console.error('Error fetching blog posts:', error)
+    // Return empty array if Sanity is not available
+  }
 
   return (
     <div className="min-h-screen bg-gray-50">
