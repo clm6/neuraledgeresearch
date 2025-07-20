@@ -19,18 +19,60 @@ import {
   ExternalLink
 } from 'lucide-react'
 import NeuralBackground from './components/NeuralBackground'
+import BlogList from '@/components/BlogList'
+import ProjectGrid from '@/components/ProjectGrid'
+import { client, blogPostsQuery, projectsQuery } from '@/lib/sanity'
 
+interface BlogPost {
+  _id: string
+  title: string
+  slug: { current: string }
+  author: string
+  publishedAt: string
+  excerpt: string
+  mainImage?: any
+  tags?: string[]
+}
 
+interface Project {
+  _id: string
+  title: string
+  slug: { current: string }
+  shortDescription: string
+  mainImage?: any
+  tags?: string[]
+  publishedAt?: string
+}
 
 export default function Home() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitMessage, setSubmitMessage] = useState('')
+  const [blogPosts, setBlogPosts] = useState<BlogPost[]>([])
+  const [projects, setProjects] = useState<Project[]>([])
   const formRef = React.useRef<HTMLFormElement>(null)
 
   // Initialize EmailJS
   useEffect(() => {
     emailjs.init('m8X1fD3AJ5d89R-Z6')
+  }, [])
+
+  // Fetch data from Sanity
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [posts, projs] = await Promise.all([
+          client.fetch(blogPostsQuery),
+          client.fetch(projectsQuery)
+        ])
+        setBlogPosts(posts.slice(0, 3)) // Show only 3 latest posts
+        setProjects(projs.slice(0, 3)) // Show only 3 latest projects
+      } catch (error) {
+        console.error('Error fetching data:', error)
+      }
+    }
+    
+    fetchData()
   }, [])
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -44,22 +86,21 @@ export default function Home() {
       email: formData.get('email'),
       service: formData.get('service'),
       message: formData.get('message'),
-      from_email: formData.get('email') // Add sender's email as from address
+      from_email: formData.get('email')
     }
 
     try {
       const result = await emailjs.send(
-        'service_4kbbx8s', // Your Gmail service ID
-        'template_17i6q0j', // Your EmailJS template ID
+        'service_4kbbx8s',
+        'template_17i6q0j',
         templateParams,
-        'm8X1fD3AJ5d89R-Z6' // Your EmailJS public key
+        'm8X1fD3AJ5d89R-Z6'
       )
 
       console.log('EmailJS result:', result)
       
       if (result.status === 200 || result.status === 0) {
         setSubmitMessage('Thank you for your message! We will get back to you soon.')
-        // Reset form safely
         if (formRef.current) {
           formRef.current.reset()
         }
@@ -117,6 +158,7 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-white relative">
       <NeuralBackground />
+      
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -129,7 +171,8 @@ export default function Home() {
             <div className="hidden md:flex items-center space-x-8">
               <a href="#services" className="text-gray-700 hover:text-primary-600 transition-colors">Services</a>
               <a href="#about" className="text-gray-700 hover:text-primary-600 transition-colors">About</a>
-              <a href="/explore" className="text-gray-700 hover:text-primary-600 transition-colors">Research</a>
+              <a href="/blog" className="text-gray-700 hover:text-primary-600 transition-colors">Blog</a>
+              <a href="/projects" className="text-gray-700 hover:text-primary-600 transition-colors">Projects</a>
               <a href="#contact" className="text-gray-700 hover:text-primary-600 transition-colors">Contact</a>
               <a href="#contact" className="btn-primary">Get Started</a>
             </div>
@@ -151,14 +194,15 @@ export default function Home() {
               <div className="px-2 pt-2 pb-3 space-y-1 bg-white border-t border-gray-100">
                 <a href="#services" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Services</a>
                 <a href="#about" className="block px-3 py-2 text-gray-700 hover:text-primary-600">About</a>
-                <a href="/explore" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Research</a>
-                      <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Contact</a>
-                      <a href="#contact" className="block px-3 py-2 btn-primary text-center">Get Started</a>
-                    </div>
-                  </div>
-                )}
+                <a href="/blog" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Blog</a>
+                <a href="/projects" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Projects</a>
+                <a href="#contact" className="block px-3 py-2 text-gray-700 hover:text-primary-600">Contact</a>
+                <a href="#contact" className="block px-3 py-2 btn-primary text-center">Get Started</a>
               </div>
-            </nav>
+            </div>
+          )}
+        </div>
+      </nav>
 
       {/* Hero Section */}
       <section className="pt-24 pb-24 gradient-bg">
@@ -182,7 +226,7 @@ export default function Home() {
                   Let's Work Together
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
-                <a href="/explore" className="btn-secondary inline-flex items-center">
+                <a href="/projects" className="btn-secondary inline-flex items-center">
                   Explore Projects
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </a>
@@ -238,7 +282,15 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Latest Projects Section */}
+      {projects.length > 0 && (
+        <ProjectGrid projects={projects} title="Latest Projects" showViewAll={true} />
+      )}
 
+      {/* Latest Blog Posts Section */}
+      {blogPosts.length > 0 && (
+        <BlogList posts={blogPosts} title="Latest Insights" showViewAll={true} />
+      )}
 
       {/* About Section */}
       <section id="about" className="py-20 bg-white">
@@ -380,10 +432,8 @@ export default function Home() {
               whileInView={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
-              className="card"
             >
-              <h3 className="text-2xl font-semibold text-gray-900 mb-6">Start Your Project</h3>
-              <form ref={formRef} className="space-y-6" onSubmit={handleSubmit}>
+              <form ref={formRef} onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
                     Name
@@ -393,10 +443,10 @@ export default function Home() {
                     id="name"
                     name="name"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Your name"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   />
                 </div>
+                
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
                     Email
@@ -406,10 +456,10 @@ export default function Home() {
                     id="email"
                     name="email"
                     required
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="your@email.com"
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   />
                 </div>
+                
                 <div>
                   <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
                     Service Interest
@@ -417,42 +467,46 @@ export default function Home() {
                   <select
                     id="service"
                     name="service"
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                   >
                     <option value="">Select a service</option>
-                    <option value="business-analytics">Business Analytics</option>
-                    <option value="power-systems">Power System Analytics</option>
-                    <option value="ai-ml">AI/ML Pipeline Development</option>
-                    <option value="arcgis">ArcGIS ML & AI Consulting</option>
-                    <option value="research">Research Consultation</option>
-                    <option value="software">Lightweight Software Development</option>
+                    <option value="Business Analytics">Business Analytics</option>
+                    <option value="Power System Analytics">Power System Analytics</option>
+                    <option value="AI/ML Pipeline Development">AI/ML Pipeline Development</option>
+                    <option value="ArcGIS ML & AI Consulting">ArcGIS ML & AI Consulting</option>
+                    <option value="Research Consultation">Research Consultation</option>
+                    <option value="Lightweight Software Development">Lightweight Software Development</option>
                   </select>
                 </div>
+                
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
-                    Project Details
+                    Message
                   </label>
                   <textarea
                     id="message"
                     name="message"
-                    required
                     rows={4}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    required
+                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
                     placeholder="Tell us about your project..."
-                  ></textarea>
+                  />
                 </div>
-                <button 
-                  type="submit" 
+                
+                <button
+                  type="submit"
                   disabled={isSubmitting}
-                  className="w-full btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
+                  className="w-full btn-primary py-3 disabled:opacity-50 disabled:cursor-not-allowed"
                 >
                   {isSubmitting ? 'Sending...' : 'Send Message'}
                 </button>
+                
                 {submitMessage && (
-                  <div className={`mt-4 p-3 rounded-lg text-sm ${
-                    submitMessage.includes('Thank you') 
-                      ? 'bg-green-100 text-green-700' 
-                      : 'bg-red-100 text-red-700'
+                  <div className={`text-center p-3 rounded-lg ${
+                    submitMessage.includes('error') 
+                      ? 'bg-red-100 text-red-700' 
+                      : 'bg-green-100 text-green-700'
                   }`}>
                     {submitMessage}
                   </div>
