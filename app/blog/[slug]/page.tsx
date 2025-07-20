@@ -36,44 +36,47 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-white">
-      <article className="pt-24 pb-16">
+    <div className="min-h-screen bg-white relative">
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 gradient-bg">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header */}
-          <header className="mb-12">
-            {post.mainImage && (
-              <div className="mb-8">
-                <img
-                  src={urlFor(post.mainImage).width(800).height(400).url()}
-                  alt={post.title}
-                  className="w-full h-64 object-cover rounded-lg"
-                />
+          <div className="text-center mb-8">
+            <div className="flex items-center justify-center text-sm text-gray-500 mb-4">
+              <span>{post.author}</span>
+              <span className="mx-2">•</span>
+              <span>{format(new Date(post.publishedAt), 'MMMM dd, yyyy')}</span>
+            </div>
+            
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-6">{post.title}</h1>
+            
+            <p className="text-xl text-gray-600 mb-6 max-w-3xl mx-auto">{post.excerpt}</p>
+            
+            {post.tags && post.tags.length > 0 && (
+              <div className="flex flex-wrap gap-2 justify-center">
+                {post.tags.map((tag) => (
+                  <span key={tag} className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
+                    {tag}
+                  </span>
+                ))}
               </div>
             )}
-            
-            <div className="mb-6">
-              <div className="flex items-center text-sm text-gray-500 mb-4">
-                <span>{post.author}</span>
-                <span className="mx-2">•</span>
-                <span>{format(new Date(post.publishedAt), 'MMMM dd, yyyy')}</span>
-              </div>
-              
-              <h1 className="text-4xl font-bold text-gray-900 mb-4">{post.title}</h1>
-              
-              <p className="text-xl text-gray-600 mb-6">{post.excerpt}</p>
-              
-              {post.tags && post.tags.length > 0 && (
-                <div className="flex flex-wrap gap-2">
-                  {post.tags.map((tag) => (
-                    <span key={tag} className="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              )}
-            </div>
-          </header>
+          </div>
+        </div>
+      </section>
 
+      {/* Content Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {post.mainImage && (
+            <div className="mb-12">
+              <img
+                src={urlFor(post.mainImage).width(800).height(400).url()}
+                alt={post.title}
+                className="w-full h-64 object-cover rounded-lg shadow-lg"
+              />
+            </div>
+          )}
+          
           {/* Content */}
           <div className="prose prose-lg max-w-none">
             <PortableText value={post.body} />
@@ -94,7 +97,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             </div>
           </footer>
         </div>
-      </article>
+      </section>
     </div>
   )
 } 

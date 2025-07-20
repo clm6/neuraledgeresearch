@@ -23,19 +23,23 @@ export default async function BlogPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="pt-24 pb-16">
+    <div className="min-h-screen bg-white relative">
+      {/* Hero Section */}
+      <section className="pt-24 pb-16 gradient-bg">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="text-4xl font-bold text-gray-900 mb-4">Blog & Insights</h1>
+          <div className="text-center">
+            <h1 className="text-5xl md:text-6xl font-bold text-gray-900 mb-8">
+              Blog & Insights
+            </h1>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
               Latest articles, research insights, and case studies from our data analytics and power systems work.
             </p>
           </div>
         </div>
-      </div>
+      </section>
       
-      <BlogList posts={posts} title="All Posts" showViewAll={false} />
+      {/* Blog Posts Section */}
+      <BlogList posts={posts} title="All Articles" showViewAll={false} />
     </div>
   )
 } 
