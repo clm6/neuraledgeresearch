@@ -3,6 +3,7 @@
 import { motion } from 'framer-motion'
 import { ArrowLeft, Calendar, Tag, ExternalLink, Brain, Code, BarChart3, Zap } from 'lucide-react'
 import Link from 'next/link'
+import NeuralBackground from '../components/NeuralBackground'
 
 export default function ExplorePage() {
   const blogPosts = [
@@ -69,7 +70,8 @@ export default function ExplorePage() {
   ]
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-white relative">
+      <NeuralBackground />
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-white/95 backdrop-blur-sm z-50 border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
