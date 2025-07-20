@@ -87,12 +87,20 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
               <div className="text-sm text-gray-500">
                 NeuralEdge Research Project
               </div>
-              <a 
-                href="/projects"
-                className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
-              >
-                ← Back to Projects
-              </a>
+              <div className="flex items-center space-x-4">
+                <a 
+                  href="/projects"
+                  className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
+                >
+                  ← Back to Projects
+                </a>
+                <a 
+                  href="/"
+                  className="text-gray-600 hover:text-gray-800 font-medium inline-flex items-center"
+                >
+                  ← Back to Home
+                </a>
+              </div>
             </div>
           </footer>
         </div>

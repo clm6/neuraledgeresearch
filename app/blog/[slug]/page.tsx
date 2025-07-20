@@ -88,12 +88,20 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
               <div className="text-sm text-gray-500">
                 Written by {post.author}
               </div>
-              <a 
-                href="/blog"
-                className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
-              >
-                ← Back to Blog
-              </a>
+              <div className="flex items-center space-x-4">
+                <a 
+                  href="/blog"
+                  className="text-blue-600 hover:text-blue-800 font-medium inline-flex items-center"
+                >
+                  ← Back to Blog
+                </a>
+                <a 
+                  href="/"
+                  className="text-gray-600 hover:text-gray-800 font-medium inline-flex items-center"
+                >
+                  ← Back to Home
+                </a>
+              </div>
             </div>
           </footer>
         </div>
