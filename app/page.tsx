@@ -223,6 +223,7 @@ export default function Home() {
               <p className="text-xl text-gray-600 mb-24 max-w-3xl mx-auto">
                 Professional data analytics services delivering insights that drive business growth, 
                 power system optimization, and cutting-edge AI/ML solutions.
+                <span style={{ display: 'none' }}>Impact-Site-Verification: undefined</span>
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
                 <a href="#contact" className="btn-primary inline-flex items-center">
